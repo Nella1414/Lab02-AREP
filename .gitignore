@@ -1,0 +1,56 @@
+# Java + Maven .gitignore
+
+# Compiled class files
+*.class
+plan/
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Maven build output
+/target/
+/release.properties
+/dependency-reduced-pom.xml
+/buildNumber.properties
+
+# Keep Maven wrapper files if present (do NOT ignore the wrapper binaries)
+/!.mvn/wrapper/maven-wrapper.jar
+/!.mvn/wrapper/maven-wrapper.properties
+
+# If a project-local maven repository was created, ignore it
+/.mvn/repository/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/build/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+*.swp
+*.bak
