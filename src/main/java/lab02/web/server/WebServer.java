@@ -102,7 +102,12 @@ public class WebServer {
         Map<HttpMethod, Handler> byMethod = registry.get(request.getPath());
         Handler handler = byMethod != null ? byMethod.get(request.getMethod()) : null;
         Response response = new Response();
-        String candidate = this.assetsRoot + request.getPath();
+        String path = request.getPath();
+        if (path == null || path.isEmpty())
+            path = "/";
+        if (path.endsWith("/"))
+            path = path + "index.html";
+        String candidate = this.assetsRoot + path;
 
         if (handler != null) {
             handler.handle(request, response);
