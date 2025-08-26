@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -11,11 +12,33 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.time.Instant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WebServer {
     private int listeningPort;
     private String assetsRoot;
     private final Map<String, Map<HttpMethod, Handler>> registry;
+
+    public static Map<String, Method> services = new HashMap();
+
+    private static void loadComponents(String[] args){
+        try{
+            Class c = Class.forName(args[0]);
+            if (c.isAnnotationPresent(RestController.class)){
+                Method[] methods = c.getDeclaredMethods();
+
+                for (Method m :methods){
+                    if(m.isAnnotationPresent(GetMapping.class)){
+                        String mapping = m.getAnnotation(GetMapping.class).value();
+                        services.put(mapping, m);
+                    }
+                }
+            }
+        } catch (ClassNotFoundException ex){
+            Logger.getLogger(WebServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public WebServer() {
         this(8000, "src/main/resources/static");

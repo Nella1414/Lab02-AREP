@@ -1,4 +1,4 @@
-# Lab 02 — Lightweight Java Web Framework (TDSE)
+# Lab 03 — Lightweight Java Web Framework (TDSE)
 
 A minimal web framework built in Java that serves static files and lets you define REST endpoints with concise lambda handlers. It includes query parameter parsing and a tiny routing table.
 
